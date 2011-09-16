@@ -1,15 +1,22 @@
 
 class Foldr
 	SUPPORTED_EXT = %w{ 3gp asf wmv au avi flv mov mp4 ogm ogg mkv mka ts mpg mp3 mp2 nsc nsv nut ra ram rm rv rmbv a52 dts aac flac dv vid tta dv vid tac ty wav dts xa m4a }
-
+	
 	def initialize(paths)
-		puts "populating foldr."
+		@paths = paths
+		initFoldr(@paths)
+	end
+	
+	def initFoldr(paths)
 		@contents = []
 		paths.gsub('\\', '/').split(';').each do |path|
 			contents = fileDrill(path)
 			@contents.push(*contents) if contents.length > 0
 		end
-		puts "population of foldr complete."
+	end
+	
+	def reload
+		initFoldr(@paths)
 	end
 	
 	def contents

@@ -87,8 +87,24 @@
 	
 	$("#up").click(function(){go_up()});
 	
+	$("#reload").click(function(){
+		$.ajax({
+			url: location,
+			data: {reload:true},
+			success: reload,
+			dataType: "json"
+		});
+	});
+	
+	function reload(response){
+		var currentPath = location.hash.substring(1).split("/");
+		contents = response;
+		parentDirs = [];
+		currentDir = contents;
+		navigateTo(currentPath)
+	}
+	
 	function navigateTo(path){
-		console.log(path[0])
 		if(!path.length)
 			return
 		var item = path.shift();
