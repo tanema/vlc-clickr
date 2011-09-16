@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>VlcClickr</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="play-backContainer">
+		<ul class="playbackOptions">   
+			<li id="rewind"><%= image_tag('rewind.png', :class=>'icon') %></li>
+			<li id="play"><%= image_tag('play.png', :class=>'icon') %></li>
+			<li id="pause"><%= image_tag('pause.png', :class=>'icon') %></li>
+			<li id="stop"><%= image_tag('stop.png', :class=>'icon') %></li>
+			<li id="forward"><%= image_tag('fastforward.png', :class=>'icon') %></li>
+		</ul>
+	</div>
+	 
+	<ul class='main_menu'>
+		<li><%= link_to "Movies", :action => 'movies', :controller => 'paths' %></li>
+		<li><%= link_to "Tv", :action => 'tv', :controller => 'paths' %></li>
+		<li><%= link_to "Music", :action => 'music', :controller => 'paths' %></li>
+	</ul>
+	<ul class='navigation'>
+		<li><div id="reload"><%= image_tag('refresh.png', :class=>'icon') %></div></li>
+		<li><div id="up"><%= image_tag('up.png', :class=>'icon') %></div></li>
+	</ul>
+	
+	<div id="content">
+		<%= yield %>
+	</div>
+
+	<script type='text/javascript'>
+		function vlc_call(method, arg){
+			$.get("<%= root_url %>vlc/"+method, {arg: arg},function(data){
+				console.log(data)
+			})
+		}
+	
+		$('#play').click(function(){vlc_call("play")})
+		$('#pause').click(function(){vlc_call("pause")})
+		$('#stop').click(function(){vlc_call("stop")})
+		$('#forward').click(function(){vlc_call("nxt")})
+		$('#rewind').click(function(){vlc_call("prev")})
+	</script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.left {
+	float:left;	
+}
+
+.right {
+	float:right;
+}
+
+.clear {
+	clear:both
+}
+
+header, footer, article, section, nav, menu, hgroup {  
+	display: block;  
+}
+
+a {
+	color: #111111;
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:none;
+}
+
+a:active {
+	position:relative;
+	top: 2px;
+}
+
+a.mm {
+	position:fixed;
+	bottom:10px;
+	right:10px;
+	background:url(../images/MediaMilan-White.png) left top no-repeat;
+	width:30px;
+	height:30px;
+	display:block;
+}
+
+/* -------------- END CSS RESET -------------- */
+
+#play-backContainer {
+	margin:5px 10px 0px 10px;
+	background:rgba(0,0,0,0.84);
+	padding:7px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	overflow:hidden;
+}
+
+#play-backContainer a {
+	color:#FFF;
+}
+
+.playbackOptions li {
+	float:left;
+	text-align:center;
+}
+
+ul.main_menu{
+	margin:0;
+    padding:0;
+    list-style:none;
+	padding:10px 10px 0;
+}
+
+ul.main_menu li{
+	background: url("norm_right.gif") no-repeat right top;
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+
+ul.main_menu li a{
+	display:block;
+	background:url("norm_left.gif") no-repeat left top;
+    padding:5px 15px;
+}
+
+ul.main_menu li.current {
+	background-image:url("norm_right_on.gif");
+}
+ul.main_menu li.current a {
+	background-image:url("norm_left_on.gif");
+}
+
+ul.navigation{
+	border: thin solid black;
+	background:rgba(0,0,0,0.84);
+	border-radius: 0 10px 0 0;
+	-moz-border-radius: 0 10px 0 0;
+	-webkit-border-radius: 0 10px 0 0;
+	margin:0 10px;
+    padding: 0px;
+    list-style:none;
+}
+
+ul.navigation li{
+    margin:0;
+    padding: 0px 5px;
+	display: inline-block;
+}
+
+
+#content {
+	padding: 10px;
+	margin: -1px 10px;
+	border: thin solid black;
+	border-radius: 0 0 5px 5px;
+}
+
+#items_holder{
+
+}
+
+.icon{
+	height: 50px;
+	width: 50px;
+}
+
+.file_text{
+	display: inline;
+	padding: 10px;
+}
+
+.file_ops{
+	display: inline-block;
+	float: right;
+}
+
+.file_ops div{
+	float:right;
+	text-align:center;
+}
+
+.file, .folder{
+	color: white;
+	border: thin solid black;
+	background:rgba(0,0,0,0.84);
+	padding: 5px;
+	margin-bottom: 3px;
+	-moz-border-radius: 15px;
+	border-radius: 5px;
+}

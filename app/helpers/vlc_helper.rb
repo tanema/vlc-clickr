@@ -1,0 +1,2 @@
+module VlcHelper
+end

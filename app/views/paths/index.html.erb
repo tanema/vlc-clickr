@@ -1,0 +1,118 @@
+<div id="items_holder">
+	
+<div>
+<script type="text/javascript">
+
+	var contents = <%= @contents.to_json.html_safe %>,
+		parentDirs = [],
+		currentDir = contents;
+	
+	function doCurrentView(directoryArray){
+		$.each(directoryArray, function(index, item){
+			if(item.isdir)
+				folderView(item)
+			else
+				fileView(item)
+		})
+	}
+	
+	function playOp(file){
+		var play = $("<div>")
+						.addClass('play_file')
+						.html('<%= image_tag('play.png', :class=>'icon') %>')
+						.click(function(){
+							vlc_call("add", file.path)
+						});
+		return play
+	}
+	
+	function enqueueOp(file){
+		var enqueue = $("<div>")
+						.addClass('queue_file')
+						.html('<%= image_tag('plus.png', :class=>'icon') %>')
+						.click(function(){
+							vlc_call("enqueue", file.path)
+						});
+		return enqueue
+	}
+	
+	function fileView(file){
+		var fileOps = $("<div>")
+						.addClass('file_ops')
+						.append(enqueueOp(file))
+						.append(playOp(file));
+		var fileText = $("<div>")
+						.addClass('file_text')
+						.html(file.name)
+						.append(fileOps);
+		var newFile = $("<div>")
+						.addClass('file')
+						.html('<%= image_tag('video.png', :class=>'icon') %>')
+						.append(fileText)
+						.click(function(){
+							
+						});
+		$("#items_holder").append(newFile)
+	}
+	
+	function folderView(folder){
+		var folderText = $("<div>")
+						.addClass('file_text')
+						.html(folder.name);
+		var newFolder = $("<div>")
+						.addClass('folder')
+						.html('<%= image_tag('folder.png', :class=>'icon') %>')
+						.append(folderText)
+						.click(function(){goto_folder(folder)});
+		$("#items_holder").append(newFolder)
+	}
+	
+	function goto_folder(folder, skip_state){
+		if(!skip_state)
+			push_hash(folder.fullname)//window.history.pushState("dir", folder.fullname, location.pathname+'/'+folder.fullname);
+		$("#items_holder").html('')
+		parentDirs.push(currentDir);
+		currentDir = folder.subdirs;
+		doCurrentView(currentDir)
+	}
+	
+	function go_up(){
+		if(parentDirs.length > 0){
+			$("#items_holder").html('')
+			pop_hash()//window.history.back();
+			currentDir = parentDirs.pop()
+			doCurrentView(currentDir)
+		}
+	}
+	
+	$("#up").click(function(){go_up()});
+	
+	function navigateTo(path){
+		console.log(path[0])
+		if(!path.length)
+			return
+		var item = path.shift();
+		for(var i = 0; i < currentDir.length; i++){
+			if(item == currentDir[i].fullname){
+				goto_folder(currentDir[i], true)
+			}
+		}
+		if(path.length > 0)
+			navigateTo(path)
+	}
+	
+	function push_hash(item){
+		location.hash = location.hash.substring(1) + item + "/";
+	}
+	
+	function pop_hash(){
+		location.hash = location.hash.substring(1, location.hash.substring(0,location.hash.length-2).lastIndexOf("/"))
+	}
+	
+	var initPath = location.hash.substring(1).split('/')
+	if(initPath.length > 0 && initPath[0] != "")
+		navigateTo(initPath)
+	else	
+		doCurrentView(contents);
+	
+</script>

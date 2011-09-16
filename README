@@ -1,0 +1,14 @@
+Vlc-clickr
+=============
+
+This is a remote control web app that will list the media files in directories configured. Then the user can choose what to play on
+the remote machine, also play/stop/pause/next/forward controls available. 
+
+upcomming functionality
+------
+
+This project is a WORK-IN-PROGRESS so there are things that are going to be added still. like
+
+*playlist functionality
+*better views for music so I can enque multiple files at a time
+*(long distance) adding a streaming source
